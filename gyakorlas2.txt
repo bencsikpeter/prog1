@@ -1,0 +1,237 @@
+#include <iostream>
+#include <cmath>
+#include <vector>
+#include <string>
+#include <fstream>
+using namespace  std;
+
+int oszto(int a , int b)
+{
+    int max;
+    int min;
+    if (a>b)
+    {
+        max = a;
+        min = b;
+    }else
+    {
+        max = b;
+        min = a;
+    }
+    for (int i = min; i <max ; ++i)
+    {
+        if (i%3 == 0 && i%5==0)
+        {
+            return i;
+        }
+    }
+}
+int *nagyobb(int tomb[5][5])
+{
+    int k=0;
+    int* feltolt = new int[25];
+    for (int i = 0; i <5 ; ++i)
+    {
+        for (int j = 0; j <5 ; ++j)
+        {
+            if (tomb[i][j]>25)
+            {
+                feltolt[k]= tomb[i][j];
+                k++;
+            }
+        }
+    }
+    return feltolt;
+}
+void  rendez(int & a ,int &b, int &c)
+{
+    int tmp = 0;
+    if (a>b)
+    {
+        tmp = a;
+        a = b;
+        b= tmp;
+    }
+    if (a>c)
+    {
+        tmp = a;
+        a = c;
+        c = tmp;
+    }
+    if (b>c)
+    {
+        tmp = b;
+        b = c;
+        c = tmp;
+    }
+}
+class Banan
+{
+public: int suly;
+    string minoseg;
+    bool bio;
+};
+
+void operator++(Banan a)
+{
+    cout<<a.minoseg<<" "<<a.suly<<" "<<a.bio<<endl;
+}
+
+void operator<<(ostream& c, Banan a)
+{
+    c<<a.minoseg<<" "<<a.bio<<" "<<a.suly<<endl;
+}
+
+vector<int> operator+(vector<int>vec2,vector<int>vec3)
+{
+    vector<int>v1;
+    for(int i : vec2)
+    {
+        v1.push_back(i);
+    }
+    for(int i:vec3)
+    {
+        v1.push_back(i);
+    }
+    return v1;
+}
+int main() {
+
+    int szam =oszto(1,40);
+    cout<<"A 3-mal es 5- el oszthato szam: ";
+    cout<<szam<<endl;
+    int tomb[5][5] ={
+            {1,23,12,13,56,},
+            {67,34,25,2,54},
+            {4,54,55,98,781},
+            {3,12,13,51,0},
+            {23,54,43,24,90}
+    };
+    int* ir = new int[25];
+    ir = nagyobb(tomb);
+    cout<<" A 25-nel nagyobb elemek: ";
+    for (int i = 0; i < 25; ++i)
+    {
+        if (ir[i]!=0)
+        {
+            cout<<ir[i]<<" ";
+        }
+
+
+    }
+    cout<<endl;
+    int a,b,c;
+    a = 3;
+    b = 1;
+    c= 2;
+    rendez(a,b,c);
+    cout<<"a:"<<a <<" "<<"b:"<<b<<" "<<"c:"<<c<<endl;
+
+    int beszam;
+    string beszo;
+    int sum = 0;
+    vector<string>vec;
+    cout<<" Adjon meg egy szamot: ";
+    cin >>beszam;
+    for (int i = 0; i < 5; ++i)
+    {
+        cout<<"Adjon meg egy szot: ";
+        cin>>beszo;
+        sum += beszo.length();
+        vec.push_back(beszo);
+    }
+    cout<<endl;
+    cout<<" Aminel kissebnek kell lennie: "<<(sum/5)+beszam<<endl;
+    cout<<"A szavak: ";
+    for (int i = 0; i < vec.size(); ++i)
+    {
+        if (vec[i].length()<(sum/5)+beszam)
+        {
+            cout<< vec[i]<<" ";
+        }
+    }
+
+    cout<<endl;
+
+    vector<Banan>gyumolcs;
+    Banan q,w,r,t;
+
+    q.suly = 1;
+    q.minoseg ="A";
+    q.bio=1;
+    gyumolcs.push_back(q);
+
+    w.suly = 2;
+    w.minoseg ="A";
+    w.bio=0;
+    gyumolcs.push_back(w);
+
+    r.suly = 4;
+    r.minoseg ="A";
+    r.bio=1;
+    gyumolcs.push_back(r);
+
+    t.suly = 3;
+    t.minoseg ="B";
+    t.bio=0;
+    gyumolcs.push_back(t);
+
+    int ossz = 0;
+    for(Banan text:gyumolcs)
+    {
+        if (text.minoseg =="A"&&text.bio==1)
+        {
+            ossz += text.suly;
+        }
+    }
+    cout<<"Az A minosegu bio bananok tomege: "<<ossz<<endl;
+
+    ofstream beir("sorok.txt");
+    beir<<"z lm af";
+    beir <<"krm bsztaa";
+    beir<<"fszom aatujd";
+    beir<<"brck af";
+    beir.close();
+    string tomb2;
+    ifstream olvas("sorok.txt");
+    ifstream  fin("read.txt");
+    char ch;
+    int i, ca=0, cb=0;
+    while(olvas)
+    {
+        olvas.get(ch);
+        i=ch;
+        if (i ==65 || i ==97)
+        {
+            ca++;
+        }
+        if (i ==98 || i ==66)
+        {
+            cb++;
+        }
+
+    }
+    cout<<"Az a betuk szama: "<<ca <<endl;
+    cout<<" A b betuk szama: "<<cb<<endl;
+    ++q;
+    cout<<q;
+
+    vector<int>vec2;
+    vec2.push_back(1);
+    vec2.push_back(2);
+    vec2.push_back(3);
+
+    vector<int>vec3;
+    vec3.push_back(4);
+    vec3.push_back(0);
+    vec3.push_back(5);
+
+    vector<int>v1;
+    v1 = vec2+vec3;
+    for(int i:v1)
+    {
+        cout<<v1[i]<<" ";
+    }
+    cout<<endl;
+    return 0;
+}
