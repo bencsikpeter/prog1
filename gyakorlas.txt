@@ -1,0 +1,96 @@
+#include <iostream>
+#include <string>
+#include <vector>
+
+
+using namespace std;
+
+
+class Allat{
+public:
+    string nev;
+    int kor;
+};
+
+vector<int> operator+(vector<int> a,vector<int> b){
+    vector<int> v;
+    for (int i : a) {
+        v.push_back(i);
+    }
+    for (int i : b) {
+        v.push_back(i);
+    }
+
+    return v;
+}
+
+void operator++(Allat a){
+    cout << a.nev << a.kor << endl;
+}
+
+void operator+(vector<Allat>& a, Allat b){
+    a.push_back(b);
+}
+
+void operator<<(ostream& c, Allat allat){
+    c << "Nev: " <<allat.nev << " Kor: " << allat.kor << endl;
+}
+
+void operator<<(ostream& c, vector<Allat> allat){
+    for (Allat all : allat) {
+        cout << all.nev << " " << all.kor << endl;
+    }
+}
+
+int main() {
+
+    vector<Allat> allatok;
+    Allat egy;
+    egy.nev = "Feri";
+    egy.kor = 34;
+
+    cout << egy;
+
+    Allat ketto;
+    ketto.nev = "Macska";
+    ketto.kor = 2;
+
+    allatok.push_back(egy);
+    allatok+ketto;
+
+    cout << allatok;
+
+
+    /*
+    int ketto = 0;
+    vector<int> a;
+    vector<int> b;
+
+    a.push_back(3);
+    a.push_back(32);
+    a.push_back(6);
+
+    b.push_back(1);
+    b.push_back(7);
+    b.push_back(39);
+
+
+    vector<int> v1;
+
+    v1 = a+b;
+
+
+    for(int abn : v1){
+        cout << abn << endl;
+    }
+
+
+
+    Allat c;
+    c.nev = "fasz";
+    c.kor = 1;
+
+    ++ketto;
+     */
+
+}
